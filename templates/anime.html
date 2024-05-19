@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="grid-cols-2 grid gap-1 mx-8 my-8 text-white">
+  <div><img src="{{ anime['image'] }}" class="rounded-md outline outline-purple-500 outline-2 eglow" alt="{{ anime['title'] }}" height="70%" width="70%"></div>
+  <div>
+    <h1 style="font-size:20px;"><strong>Title:</strong> </h1>
+    <h1 style="font-size:20px;">{{ anime['title'] }}</h1>
+    <br>
+    <p style="font-size:20px;"><strong>Description:</strong></p>
+    <p style="font-size:20px;">{{ anime['description'] }}</p>
+    <br>
+    <p style="font-size:20px;"><strong>Genres:</strong></p>
+    <p style="font-size:20px;">{{ ", ".join(anime['genres']) }}</p>
+  </div>
+</div>
+<br>
+<div class="grid-cols-5 grid gap-5 mx-4 my-4">
+  {% for episode in anime['episodes'] %}
+  <a href="{{ url_for('watch', episode_id=episode['id']) }}"><li class="eptiles eglow text-white px-2 py-2 rounded-md outline outline-purple-500 outline-2 justify-center" style="list-style-type: none;">Episode {{ episode['number'] }}</li></a>
+  {% endfor %}
+</div>
+{% endblock %}

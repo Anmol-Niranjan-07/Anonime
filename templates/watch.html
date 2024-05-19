@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="grid-cols-2 grid gap-4 mx-4 my-4 text-white"">
+  <div>
+  <h1 style="font-size: 20px;"><strong>Episode {{ episode_id.split('-')[-1] }}</strong></h2>
+  <video id="video-player" height="80vh" class="mt-4 video-js vjs-theme-city vjs-big-play-centered rounded vjs-16-9" controls style="width: 100%; max-width: 100vw;">
+      {% for source in sources %}
+          <source src="{{ sources[3]['url'] }}" type="application/x-mpegURL" label="{{ source['quality'] }}">
+      {% endfor %}
+      Your browser does not support the video tag.
+  </video>
+  </div>
+  <div class="grid-cols-2 grid gap-4 mx-4 my-4 text-white"">
+    <img src="{{ anime['image'] }}" class="eglow rounded-md outline outline-purple-500 outline-2" alt="{{ anime['title'] }}" height="100%" width="100%">
+    <div>
+      <h1 style="font-size:20px;"><strong>Title:</strong> </h1>
+      <h1 style="font-size:20px;">{{ anime['title'] }}</h1>
+      <br>
+
+      <p style="font-size:20px;"><strong>Genres:</strong></p>
+      <p style="font-size:20px;">{{ ", ".join(anime['genres']) }}</p>
+    </div>
+  </div>
+
+</div>
+<br>
+<div class="grid-cols-5 grid gap-5 mx-4 my-4">
+  {% for episode in anime['episodes'] %}
+  <a href="{{ url_for('watch', episode_id=episode['id']) }}"><li class="eptiles eglow text-white px-2 py-2 rounded-md outline outline-purple-500 outline-2 justify-center" style="list-style-type: none;">Episode {{ episode['number'] }}</li></a>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script>
+    var player = videojs('video-player');
+    player.play();
+
+    document.getElementById('quality-selector').addEventListener('click', function() {
+        document.getElementById('quality-options').classList.toggle('hidden');
+    });
+
+    function changeQuality(url) {
+        player.src({src: url, type: 'application/x-mpegURL'});
+        player.play();
+    }
+</script>
+<style>
+    .video-js {
+      
+      box-shadow: 0 0 10px 2px #A367B1;
+    }
+</style>
+{% endblock %}

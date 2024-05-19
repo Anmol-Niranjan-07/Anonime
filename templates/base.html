@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://angular.io/assets/images/logos/angular/angular_whiteTransparent.svg">
+
+
+  <title>ANONIME</title>
+</head>
+<body>
+  <header class="eglow text-gray-600 body-font navbar outline outline-purple-500 outline-2">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center" bis_skin_checked="1">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{ url_for('index') }}">
+        <img src="https://angular.io/assets/images/logos/angular/angular_whiteTransparent.svg" alt="Anonime" width="50" height="50">
+        <span class="logo ml-3 text-xl text-white title">ANONIME</span>
+      </a>
+      
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <form class="form-inline" action="{{ url_for('search') }}" method="get">
+            <input type="text" class="input" name="q" placeholder="Search for anime...">
+            
+        </form>
+      </nav>
+      
+    </div>
+  </header>
+
+  <main class="container">
+    
+      {% block content %}{% endblock %}
+  </main>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
