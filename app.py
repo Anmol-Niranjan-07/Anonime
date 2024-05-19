@@ -33,5 +33,4 @@ def watch(episode_id):
 
     return render_template('watch.html', sources=sources, anime=anime_info, episode_id=episode_id)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
